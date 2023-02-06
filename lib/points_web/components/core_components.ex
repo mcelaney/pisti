@@ -11,8 +11,9 @@ defmodule PointsWeb.CoreComponents do
   """
   use Phoenix.Component
 
-  alias Phoenix.LiveView.JS
   import PointsWeb.Gettext
+  alias Phoenix.HTML.Form
+  alias Phoenix.LiveView.JS
 
   @doc """
   Renders a modal.
@@ -276,11 +277,11 @@ defmodule PointsWeb.CoreComponents do
     assigns
     |> assign(field: nil)
     |> assign_new(:name, fn ->
-      name = Phoenix.HTML.Form.input_name(f, field)
+      name = Form.input_name(f, field)
       if assigns.multiple, do: name <> "[]", else: name
     end)
-    |> assign_new(:id, fn -> Phoenix.HTML.Form.input_id(f, field) end)
-    |> assign_new(:value, fn -> Phoenix.HTML.Form.input_value(f, field) end)
+    |> assign_new(:id, fn -> Form.input_id(f, field) end)
+    |> assign_new(:value, fn -> Form.input_value(f, field) end)
     |> assign_new(:errors, fn -> translate_errors(f.errors || [], field) end)
     |> input()
   end

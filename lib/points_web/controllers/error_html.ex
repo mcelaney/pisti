@@ -1,4 +1,6 @@
 defmodule PointsWeb.ErrorHTML do
+  @moduledoc false
+
   use PointsWeb, :html
 
   # If you want to customize your error pages,
