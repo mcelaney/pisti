@@ -5,7 +5,7 @@ defmodule PointsWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header>Change Email</.header>
+    <.header><%= gettext("Change Email") %></.header>
 
     <.simple_form
       :let={f}
@@ -15,7 +15,7 @@ defmodule PointsWeb.UserSettingsLive do
       phx-change="validate_email"
     >
       <.error :if={@email_changeset.action == :insert}>
-        Oops, something went wrong! Please check the errors below.
+        <%= gettext("Oops, something went wrong! Please check the errors below.") %>
       </.error>
 
       <.input field={{f, :email}} type="email" label="Email" required />
@@ -25,16 +25,16 @@ defmodule PointsWeb.UserSettingsLive do
         name="current_password"
         id="current_password_for_email"
         type="password"
-        label="Current password"
+        label={gettext("Current password")}
         value={@email_form_current_password}
         required
       />
       <:actions>
-        <.button phx-disable-with="Changing...">Change Email</.button>
+        <.button phx-disable-with="Changing..."><%= gettext("Change Email") %></.button>
       </:actions>
     </.simple_form>
 
-    <.header>Change Password</.header>
+    <.header><%= gettext("Change Password") %></.header>
 
     <.simple_form
       :let={f}
@@ -47,24 +47,28 @@ defmodule PointsWeb.UserSettingsLive do
       phx-trigger-action={@trigger_submit}
     >
       <.error :if={@password_changeset.action == :insert}>
-        Oops, something went wrong! Please check the errors below.
+        <%= gettext("Oops, something went wrong! Please check the errors below.") %>
       </.error>
 
       <.input field={{f, :email}} type="hidden" value={@current_email} />
 
-      <.input field={{f, :password}} type="password" label="New password" required />
-      <.input field={{f, :password_confirmation}} type="password" label="Confirm new password" />
+      <.input field={{f, :password}} type="password" label={gettext("New password")} required />
+      <.input
+        field={{f, :password_confirmation}}
+        type="password"
+        label={gettext("Confirm new password")}
+      />
       <.input
         field={{f, :current_password}}
         name="current_password"
         type="password"
-        label="Current password"
+        label={gettext("Current password")}
         id="current_password_for_password"
         value={@current_password}
         required
       />
       <:actions>
-        <.button phx-disable-with="Changing...">Change Password</.button>
+        <.button phx-disable-with={gettext("Changing...")}><%= gettext("Change Password") %></.button>
       </:actions>
     </.simple_form>
     """
@@ -74,10 +78,10 @@ defmodule PointsWeb.UserSettingsLive do
     socket =
       case Accounts.update_user_email(socket.assigns.current_user, token) do
         :ok ->
-          put_flash(socket, :info, "Email changed successfully.")
+          put_flash(socket, :info, gettext("Email changed successfully."))
 
         :error ->
-          put_flash(socket, :error, "Email change link is invalid or it has expired.")
+          put_flash(socket, :error, gettext("Email change link is invalid or it has expired."))
       end
 
     {:ok, push_navigate(socket, to: ~p"/users/settings")}
@@ -123,7 +127,7 @@ defmodule PointsWeb.UserSettingsLive do
           &url(~p"/users/settings/confirm_email/#{&1}")
         )
 
-        info = "A link to confirm your email change has been sent to the new address."
+        info = gettext("A link to confirm your email change has been sent to the new address.")
         {:noreply, put_flash(socket, :info, info)}
 
       {:error, changeset} ->
