@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserSettingsLiveTest do
+defmodule PointsWeb.User.SettingsLiveTest do
   use PointsWeb.ConnCase
 
   alias Points.Accounts

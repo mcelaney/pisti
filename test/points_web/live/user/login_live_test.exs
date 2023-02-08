@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserLoginLiveTest do
+defmodule PointsWeb.User.LoginLiveTest do
   use PointsWeb.ConnCase
 
   import Phoenix.LiveViewTest

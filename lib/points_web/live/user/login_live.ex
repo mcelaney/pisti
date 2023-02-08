@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserLoginLive do
+defmodule PointsWeb.User.LoginLive do
   use PointsWeb, :live_view
 
   def render(assigns) do

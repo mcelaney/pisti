@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserSettingsLive do
+defmodule PointsWeb.User.SettingsLive do
   use PointsWeb, :live_view
 
   alias Points.Accounts

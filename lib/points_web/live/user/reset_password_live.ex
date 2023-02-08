@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserResetPasswordLive do
+defmodule PointsWeb.User.ResetPasswordLive do
   use PointsWeb, :live_view
 
   alias Points.Accounts

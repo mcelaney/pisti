@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserConfirmationLive do
+defmodule PointsWeb.User.ConfirmationLive do
   use PointsWeb, :live_view
 
   alias Points.Accounts
