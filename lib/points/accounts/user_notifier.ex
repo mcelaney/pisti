@@ -1,4 +1,6 @@
 defmodule Points.Accounts.UserNotifier do
+  @moduledoc false
+
   import Swoosh.Email
 
   alias Points.Mailer

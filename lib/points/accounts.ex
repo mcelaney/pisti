@@ -4,9 +4,11 @@ defmodule Points.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Points.Repo
 
-  alias Points.Accounts.{User, UserToken, UserNotifier}
+  alias Points.Accounts.User
+  alias Points.Accounts.UserNotifier
+  alias Points.Accounts.UserToken
+  alias Points.Repo
 
   ## Database getters
 

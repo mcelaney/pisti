@@ -1,4 +1,7 @@
 defmodule PointsWeb.UserAuth do
+  @moduledoc """
+  Auto-generated file from phx.gen.auth
+  """
   use PointsWeb, :verified_routes
 
   import Plug.Conn

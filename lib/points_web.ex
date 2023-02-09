@@ -85,6 +85,17 @@ defmodule PointsWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import PointsWeb.CoreComponents
+      import PointsWeb.Components.CoreComponents.Flash
+      import PointsWeb.Components.CoreComponents.Form
+      import PointsWeb.Components.CoreComponents.Form.Button
+      import PointsWeb.Components.CoreComponents.Form.Error
+      import PointsWeb.Components.CoreComponents.Form.Input
+      import PointsWeb.Components.CoreComponents.Form.Label
+      import PointsWeb.Components.CoreComponents.Header
+      import PointsWeb.Components.CoreComponents.JSCommands
+      import PointsWeb.Components.CoreComponents.List
+      import PointsWeb.Components.CoreComponents.Modal
+      import PointsWeb.Components.CoreComponents.Table
       import PointsWeb.Gettext
 
       # Shortcut for generating JS commands
