@@ -1,0 +1,95 @@
+<.header>
+  <%= @project.title %>
+  <:subtitle>
+    <.link patch={~p"/projects"}>
+      <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= gettext("projects") %>
+    </.link>
+  </:subtitle>
+
+  <:actions>
+    <.link patch={~p"/projects/#{@project}/edit"} phx-click={JS.push_focus()}>
+      <.button><%= gettext("Edit") %></.button>
+    </.link>
+
+    <.link patch={~p"/projects/#{@project}/new_sub_project"} phx-click={JS.push_focus()}>
+      <.button><%= gettext("Add Sub-Project") %></.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="sub_projects"
+  rows={@project.sub_projects}
+  row_click={&JS.navigate(~p"/projects/#{@project}/sub_projects/#{&1}")}
+>
+  <:col :let={sub_project} label={gettext("Title")}><%= sub_project.title %></:col>
+  <:col :let={sub_project} label={gettext("Position")}><%= sub_project.position %></:col>
+  <:action :let={sub_project}>
+    <div class="sr-only">
+      <.link navigate={~p"/projects/#{@project}/sub_projects/#{sub_project}"}>
+        <%= gettext("Show") %>
+      </.link>
+    </div>
+    <.link patch={~p"/projects/#{@project}/edit_sub_project/#{sub_project}"}>
+      <%= gettext("Edit") %>
+    </.link>
+  </:action>
+  <:action :let={sub_project}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: sub_project.id})}
+      data-confirm={gettext("Are you sure?")}
+    >
+      <%= gettext("Delete") %>
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action == :edit}
+  id="project-modal"
+  show
+  on_cancel={JS.patch(~p"/projects/#{@project}")}
+>
+  <.live_component
+    module={PointsWeb.ProjectLive.FormComponent}
+    id={@project.id}
+    title={@page_title}
+    action={@live_action}
+    project={@project}
+    navigate={~p"/projects/#{@project}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :new_sub_project}
+  id="sub_project-modal"
+  show
+  on_cancel={JS.patch(~p"/projects/#{@project}")}
+>
+  <.live_component
+    module={PointsWeb.SubProjectLive.FormComponent}
+    parent={@project}
+    id={@project.id}
+    title={@page_title}
+    action={@live_action}
+    sub_project={@sub_project}
+    navigate={~p"/projects/#{@project}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :edit_sub_project}
+  id="project-modal"
+  show
+  on_cancel={JS.patch(~p"/projects/#{@project}")}
+>
+  <.live_component
+    module={PointsWeb.SubProjectLive.FormComponent}
+    parent={@project}
+    id={@project.id}
+    title={@page_title}
+    action={@live_action}
+    sub_project={@sub_project}
+    navigate={~p"/projects/#{@project}"}
+  />
+</.modal>

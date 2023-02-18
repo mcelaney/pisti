@@ -70,6 +70,20 @@ defmodule PointsWeb.Router do
       live "/users/settings", User.SettingsLive, :edit
       live "/users/settings/confirm_email/:token", User.SettingsLive, :confirm_email
     end
+
+    live_session :planning, on_mount: [{UserAuth, :ensure_authenticated}] do
+      live "/projects", ProjectLive.Index, :index
+      live "/projects/new", ProjectLive.Index, :new
+      live "/projects/:id/edit_project", ProjectLive.Index, :edit_project
+
+      live "/projects/:id", ProjectLive.Show, :show
+      live "/projects/:id/edit", ProjectLive.Show, :edit
+      live "/projects/:id/new_sub_project", ProjectLive.Show, :new_sub_project
+      live "/projects/:parent_id/edit_sub_project/:id", ProjectLive.Show, :edit_sub_project
+
+      live "/projects/:parent_id/sub_projects/:id", SubProjectLive.Show, :show
+      live "/projects/:parent_id/sub_projects/:id/edit", SubProjectLive.Show, :edit
+    end
   end
 
   scope "/", PointsWeb do

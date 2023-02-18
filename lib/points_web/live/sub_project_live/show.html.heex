@@ -1,0 +1,38 @@
+<.header>
+  <%= @sub_project.title %>
+  <:subtitle>
+    <.link patch={~p"/projects"}>
+      <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= gettext("projects") %>
+    </.link>
+    /
+    <.link patch={~p"/projects/#{@parent}"}>
+      <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= @parent.title %>
+    </.link>
+  </:subtitle>
+
+  <:actions>
+    <.link
+      patch={~p"/projects/#{@parent}/sub_projects/#{@sub_project}/edit"}
+      phx-click={JS.push_focus()}
+    >
+      <.button><%= gettext("Edit project") %></.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.modal
+  :if={@live_action == :edit}
+  id="project-modal"
+  show
+  on_cancel={JS.patch(~p"/projects/#{@parent}/sub_projects/#{@sub_project}")}
+>
+  <.live_component
+    module={PointsWeb.SubProjectLive.FormComponent}
+    id={@parent.id}
+    title={@page_title}
+    action={@live_action}
+    parent={@parent}
+    sub_project={@sub_project}
+    navigate={~p"/projects/#{@parent}/sub_projects/#{@sub_project}"}
+  />
+</.modal>
