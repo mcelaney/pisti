@@ -3,7 +3,6 @@ defmodule PointsWeb.ProjectLiveTest do
 
   import Phoenix.LiveViewTest
   import Points.PlanFixtures
-  import Points.AccountsFixtures
 
   @create_attrs %{
     title: "some title"
@@ -18,12 +17,8 @@ defmodule PointsWeb.ProjectLiveTest do
     %{project: project}
   end
 
-  defp authenticate(%{conn: conn}) do
-    %{conn: log_in_user(conn, user_fixture())}
-  end
-
   describe "Index" do
-    setup [:create_project, :authenticate]
+    setup [:create_project, :register_and_log_in_user]
 
     test "lists all projects", %{conn: conn, project: project} do
       {:ok, _index_live, html} = live(conn, ~p"/projects")
@@ -85,7 +80,7 @@ defmodule PointsWeb.ProjectLiveTest do
   end
 
   describe "Show" do
-    setup [:create_project, :authenticate]
+    setup [:create_project, :register_and_log_in_user]
 
     test "displays project", %{conn: conn, project: project} do
       {:ok, _show_live, html} = live(conn, ~p"/projects/#{project}")

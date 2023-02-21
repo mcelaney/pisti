@@ -4,11 +4,14 @@ defmodule Points.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @role_values [:archived, :joined, :member, :admin]
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :role, Ecto.Enum, values: @role_values, default: :joined
 
     timestamps()
   end
@@ -154,4 +157,19 @@ defmodule Points.Accounts.User do
       add_error(changeset, :current_password, "is not valid")
     end
   end
+
+  @doc """
+  Changes a user role to admin
+  """
+  def change_role_to_admin(user), do: change(user, %{role: :admin})
+
+  @doc """
+  Changes a user role to member
+  """
+  def change_role_to_member(user), do: change(user, %{role: :member})
+
+  @doc """
+  Changes a user role to archived
+  """
+  def change_role_to_archived(user), do: change(user, %{role: :archived})
 end

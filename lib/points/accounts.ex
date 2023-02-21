@@ -10,6 +10,20 @@ defmodule Points.Accounts do
   alias Points.Accounts.UserToken
   alias Points.Repo
 
+  @doc """
+  Returns a list of all users
+
+  ## Examples
+
+      iex> list_users()
+      [%User{}, ...]
+  """
+  def list_users() do
+    User
+    |> order_by([u], asc: u.email )
+    |> Repo.all
+  end
+
   ## Database getters
 
   @doc """
@@ -351,5 +365,32 @@ defmodule Points.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  @doc """
+  Sets a user role to admin
+  """
+  def set_admin(%User{role: role} = user) when role == :member or role == :admin do
+    user
+    |> User.change_role_to_admin()
+    |> Repo.update()
+  end
+
+  @doc """
+  Sets a user role to member
+  """
+  def set_member(%User{} = user) do
+    user
+    |> User.change_role_to_member()
+    |> Repo.update()
+  end
+
+  @doc """
+  Sets a user role to archived
+  """
+  def set_archived(%User{role: role} = user) when role == :member or role == :archived do
+    user
+    |> User.change_role_to_archived()
+    |> Repo.update()
   end
 end

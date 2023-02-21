@@ -505,4 +505,125 @@ defmodule Points.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "list_users/0" do
+    setup do
+      archived_fixture()
+      joined_fixture()
+      member_fixture()
+      admin_fixture()
+      :ok
+    end
+
+    test "returns all users" do
+      users = Accounts.list_users()
+      assert Enum.count(users) == 4
+    end
+  end
+
+  describe "set_admin/1" do
+    setup do
+      %{
+        archived: archived_fixture(),
+        joined: joined_fixture(),
+        member: member_fixture(),
+        admin: admin_fixture()
+      }
+    end
+
+    test "as an archived user", %{archived: user} do
+      assert_raise FunctionClauseError, fn ->
+        Accounts.set_admin(user)
+      end
+    end
+
+    test "as a newly joined user", %{joined: user} do
+      assert_raise FunctionClauseError, fn ->
+        Accounts.set_admin(user)
+      end
+    end
+
+    test "as a member", %{member: user} do
+      {:ok, _} = Accounts.set_admin(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :admin
+    end
+
+    test "as an admin", %{admin: user} do
+      {:ok, _} = Accounts.set_admin(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :admin
+    end
+  end
+
+  describe "set_member/1" do
+    setup do
+      %{
+        archived: archived_fixture(),
+        joined: joined_fixture(),
+        member: member_fixture(),
+        admin: admin_fixture()
+      }
+    end
+
+    test "as an archived user", %{archived: user} do
+      {:ok, _} = Accounts.set_member(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :member
+    end
+
+    test "as a newly joined user", %{joined: user} do
+      {:ok, _} = Accounts.set_member(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :member
+    end
+
+    test "as a member", %{member: user} do
+      {:ok, _} = Accounts.set_member(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :member
+    end
+
+    test "as an admin", %{admin: user} do
+      {:ok, _} = Accounts.set_member(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :member
+    end
+  end
+
+  describe "set_archived/1" do
+    setup do
+      %{
+        archived: archived_fixture(),
+        joined: joined_fixture(),
+        member: member_fixture(),
+        admin: admin_fixture()
+      }
+    end
+
+    test "as an archived user", %{archived: user} do
+      {:ok, _} = Accounts.set_archived(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :archived
+    end
+
+    test "as a newly joined user", %{joined: user} do
+      assert_raise FunctionClauseError, fn ->
+        Accounts.set_archived(user)
+      end
+    end
+
+    test "as a member", %{member: user} do
+      {:ok, _} = Accounts.set_archived(user)
+      result = Accounts.get_user!(user.id)
+      assert result.role == :archived
+    end
+
+    test "as an admin", %{admin: user} do
+      assert_raise FunctionClauseError, fn ->
+        Accounts.set_archived(user)
+      end
+    end
+  end
+
 end
