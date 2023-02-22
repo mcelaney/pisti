@@ -17,7 +17,13 @@ defmodule PointsWeb.UsersLiveTest do
   describe "Index" do
     setup [:create_users, :register_and_log_in_admin]
 
-    test "lists all users", %{conn: conn, archived: archived, joined: joined, member: member, admin: admin} do
+    test "lists all users", %{
+      conn: conn,
+      archived: archived,
+      joined: joined,
+      member: member,
+      admin: admin
+    } do
       {:ok, _index_live, html} = live(conn, ~p"/users")
 
       assert html =~ "Listing Users"

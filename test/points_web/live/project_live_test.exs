@@ -18,7 +18,7 @@ defmodule PointsWeb.ProjectLiveTest do
   end
 
   describe "Index" do
-    setup [:create_project, :register_and_log_in_user]
+    setup [:create_project, :register_confirm_and_log_in_member]
 
     test "lists all projects", %{conn: conn, project: project} do
       {:ok, _index_live, html} = live(conn, ~p"/projects")
@@ -80,7 +80,7 @@ defmodule PointsWeb.ProjectLiveTest do
   end
 
   describe "Show" do
-    setup [:create_project, :register_and_log_in_user]
+    setup [:create_project, :register_confirm_and_log_in_member]
 
     test "displays project", %{conn: conn, project: project} do
       {:ok, _show_live, html} = live(conn, ~p"/projects/#{project}")

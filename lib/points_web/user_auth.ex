@@ -165,9 +165,20 @@ defmodule PointsWeb.UserAuth do
     end
   end
 
-    def on_mount(:ensure_admin, _params, session, socket) do
-    socket = mount_current_user(session, socket)
+  def on_mount(:ensure_confirmed, _params, _session, socket) do
+    if is_nil(socket.assigns.current_user.confirmed_at) do
+      socket =
+        socket
+        |> Phoenix.LiveView.put_flash(:error, "Your email must be confirmed to access this page.")
+        |> Phoenix.LiveView.redirect(to: ~p"/")
 
+      {:halt, socket}
+    else
+      {:cont, socket}
+    end
+  end
+
+  def on_mount(:ensure_admin, _params, _session, socket) do
     if socket.assigns.current_user.role == :admin do
       {:cont, socket}
     else

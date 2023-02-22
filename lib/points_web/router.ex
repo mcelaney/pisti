@@ -71,7 +71,11 @@ defmodule PointsWeb.Router do
       live "/users/settings/confirm_email/:token", User.SettingsLive, :confirm_email
     end
 
-    live_session :planning, on_mount: [{UserAuth, :ensure_authenticated}] do
+    live_session :planning,
+      on_mount: [
+        {UserAuth, :ensure_authenticated},
+        {UserAuth, :ensure_confirmed}
+      ] do
       live "/projects", ProjectLive.Index, :index
       live "/projects/new", ProjectLive.Index, :new
       live "/projects/:id/edit_project", ProjectLive.Index, :edit_project
@@ -85,7 +89,12 @@ defmodule PointsWeb.Router do
       live "/projects/:parent_id/sub_projects/:id/edit", SubProjectLive.Show, :edit
     end
 
-    live_session :membership, on_mount: [{UserAuth, :ensure_admin}] do
+    live_session :membership,
+      on_mount: [
+        {UserAuth, :ensure_authenticated},
+        {UserAuth, :ensure_confirmed},
+        {UserAuth, :ensure_admin}
+      ] do
       live "/users", UserLive.Index, :index
     end
   end

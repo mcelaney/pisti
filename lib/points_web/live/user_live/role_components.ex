@@ -9,41 +9,40 @@ defmodule PointsWeb.UserLive.RoleComponents do
     """
   end
 
-  def role_links(%{user: %{role: :archived} = user} = assigns) do
+  def role_links(%{user: %{role: :archived}} = assigns) do
     ~H"""
-      <.build_link user={@user} role_action="change_to_member" label={gettext("Restore")} />
+    <.build_link user={@user} role_action="change_to_member" label={gettext("Restore")} />
     """
   end
 
-  def role_links(%{user: %{role: :joined} = user} = assigns) do
+  def role_links(%{user: %{role: :joined}} = assigns) do
     ~H"""
-      <.build_link user={@user} role_action="change_to_member" label={gettext("Promote")} />
+    <.build_link user={@user} role_action="change_to_member" label={gettext("Promote")} />
     """
   end
 
-  def role_links(%{user: %{role: :member} = user} = assigns) do
+  def role_links(%{user: %{role: :member}} = assigns) do
     ~H"""
-      <.build_link user={@user} role_action="archive" label={gettext("Archive")} />
-      |
-      <.build_link user={@user} role_action="change_to_admin" label={gettext("Promote")} />
+    <.build_link user={@user} role_action="archive" label={gettext("Archive")} /> |
+    <.build_link user={@user} role_action="change_to_admin" label={gettext("Promote")} />
     """
   end
 
-  def role_links(%{user: %{role: :admin} = user} = assigns) do
+  def role_links(%{user: %{role: :admin}} = assigns) do
     ~H"""
-      <.build_link user={@user} role_action="change_to_member" label={gettext("Demote")} />
+    <.build_link user={@user} role_action="change_to_member" label={gettext("Demote")} />
     """
   end
 
   def build_link(assigns) do
     ~H"""
-      <.link
-        phx-click={JS.push(@role_action, value: %{id: @user.id})}
-        data-confirm={gettext("Are you sure?")}
-        class="underline"
-      >
-        <%= @label %>
-      </.link>
+    <.link
+      phx-click={JS.push(@role_action, value: %{id: @user.id})}
+      data-confirm={gettext("Are you sure?")}
+      class="underline"
+    >
+      <%= @label %>
+    </.link>
     """
   end
 

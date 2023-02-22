@@ -625,5 +625,4 @@ defmodule Points.AccountsTest do
       end
     end
   end
-
 end
