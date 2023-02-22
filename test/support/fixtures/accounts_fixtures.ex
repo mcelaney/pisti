@@ -21,8 +21,6 @@ defmodule Points.AccountsFixtures do
       attrs
       |> valid_user_attributes()
       |> Accounts.register_user()
-      |> elem(1)
-      |> Accounts.set_member()
 
     user
   end
@@ -32,9 +30,7 @@ defmodule Points.AccountsFixtures do
       attrs
       |> valid_user_attributes()
       |> Accounts.register_user()
-      |> elem(1)
       |> Accounts.set_member()
-      |> elem(1)
       |> Accounts.set_archived()
 
     user
@@ -54,7 +50,6 @@ defmodule Points.AccountsFixtures do
       attrs
       |> valid_user_attributes()
       |> Accounts.register_user()
-      |> elem(1)
       |> Accounts.set_member()
 
     user
@@ -65,9 +60,7 @@ defmodule Points.AccountsFixtures do
       attrs
       |> valid_user_attributes()
       |> Accounts.register_user()
-      |> elem(1)
       |> Accounts.set_member()
-      |> elem(1)
       |> Accounts.set_admin()
 
     user

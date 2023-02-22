@@ -370,6 +370,8 @@ defmodule Points.Accounts do
   @doc """
   Sets a user role to admin
   """
+  def set_admin({:ok, user}), do: set_admin(user)
+  def set_admin({_, _} = result), do: result
   def set_admin(%User{role: role} = user) when role == :member or role == :admin do
     user
     |> User.change_role_to_admin()
@@ -379,6 +381,8 @@ defmodule Points.Accounts do
   @doc """
   Sets a user role to member
   """
+  def set_member({:ok, user}), do: set_member(user)
+  def set_member({_, _} = result), do: result
   def set_member(%User{} = user) do
     user
     |> User.change_role_to_member()
@@ -388,6 +392,8 @@ defmodule Points.Accounts do
   @doc """
   Sets a user role to archived
   """
+  def set_archived({:ok, user}), do: set_archived(user)
+  def set_archived({_, _} = result), do: result
   def set_archived(%User{role: role} = user) when role == :member or role == :archived do
     user
     |> User.change_role_to_archived()
