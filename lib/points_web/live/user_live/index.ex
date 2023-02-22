@@ -4,7 +4,6 @@ defmodule PointsWeb.UserLive.Index do
   import PointsWeb.UserLive.RoleComponents
 
   alias Points.Accounts
-  alias Points.Accounts.User
 
   @impl true
   def render(assigns) do
