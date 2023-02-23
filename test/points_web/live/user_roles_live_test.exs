@@ -1,4 +1,4 @@
-defmodule PointsWeb.UsersLiveTest do
+defmodule PointsWeb.UserRolesLiveTest do
   use PointsWeb.ConnCase
 
   import Phoenix.LiveViewTest
@@ -24,7 +24,7 @@ defmodule PointsWeb.UsersLiveTest do
       member: member,
       admin: admin
     } do
-      {:ok, _index_live, html} = live(conn, ~p"/users")
+      {:ok, _index_live, html} = live(conn, ~p"/user_roles")
 
       assert html =~ "Listing Users"
 
@@ -35,35 +35,35 @@ defmodule PointsWeb.UsersLiveTest do
     end
 
     test "Members can be promoted", %{conn: conn, member: user} do
-      {:ok, index_live, _html} = live(conn, ~p"/users")
+      {:ok, index_live, _html} = live(conn, ~p"/user_roles")
 
       assert index_live |> element("#users-#{user.id} a", "Promote") |> render_click()
       assert Accounts.get_user!(user.id).role == :admin
     end
 
     test "Members can be archived", %{conn: conn, member: user} do
-      {:ok, index_live, _html} = live(conn, ~p"/users")
+      {:ok, index_live, _html} = live(conn, ~p"/user_roles")
 
       assert index_live |> element("#users-#{user.id} a", "Archive") |> render_click()
       assert Accounts.get_user!(user.id).role == :archived
     end
 
     test "Admins can be demoted", %{conn: conn, admin: user} do
-      {:ok, index_live, _html} = live(conn, ~p"/users")
+      {:ok, index_live, _html} = live(conn, ~p"/user_roles")
 
       assert index_live |> element("#users-#{user.id} a", "Demote") |> render_click()
       assert Accounts.get_user!(user.id).role == :member
     end
 
     test "New users can be promoted", %{conn: conn, joined: user} do
-      {:ok, index_live, _html} = live(conn, ~p"/users")
+      {:ok, index_live, _html} = live(conn, ~p"/user_roles")
 
       assert index_live |> element("#users-#{user.id} a", "Promote") |> render_click()
       assert Accounts.get_user!(user.id).role == :member
     end
 
     test "Archived users can be promoted", %{conn: conn, archived: user} do
-      {:ok, index_live, _html} = live(conn, ~p"/users")
+      {:ok, index_live, _html} = live(conn, ~p"/user_roles")
 
       assert index_live |> element("#users-#{user.id} a", "Restore") |> render_click()
       assert Accounts.get_user!(user.id).role == :member

@@ -90,13 +90,13 @@ defmodule PointsWeb.Router do
       live "/projects/:parent_id/sub_projects/:id/edit", SubProjectLive.Show, :edit
     end
 
-    live_session :membership,
+    live_session :user_roles,
       on_mount: [
         {UserAuth, :ensure_authenticated},
         {UserAuth, :ensure_confirmed},
         {UserAuth, :ensure_admin}
       ] do
-      live "/users", UserLive.Index, :index
+      live "/user_roles", UserRolesLive.Index, :index
     end
   end
 

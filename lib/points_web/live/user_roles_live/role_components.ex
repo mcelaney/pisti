@@ -1,4 +1,4 @@
-defmodule PointsWeb.UserLive.RoleComponents do
+defmodule PointsWeb.UserRolesLive.RoleComponents do
   use Phoenix.Component
   import PointsWeb.Gettext
   alias Phoenix.LiveView.JS

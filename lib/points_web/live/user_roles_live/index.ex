@@ -1,7 +1,7 @@
-defmodule PointsWeb.UserLive.Index do
+defmodule PointsWeb.UserRolesLive.Index do
   use PointsWeb, :live_view
 
-  import PointsWeb.UserLive.RoleComponents
+  import PointsWeb.UserRolesLive.RoleComponents
 
   alias Points.Accounts
 
