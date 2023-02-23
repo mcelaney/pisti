@@ -4,8 +4,8 @@ defmodule Points.Report do
   """
 
   import Ecto.Query, warn: false
-  alias Points.Repo
 
+  alias Points.Repo
   alias Points.Report.Project
   alias Points.Report.SubProject
 
@@ -107,13 +107,13 @@ defmodule Points.Report do
   """
   def create_sub_project(parent, attrs) do
     %SubProject{}
-    |> SubProject.changeset(add_parent(attrs, parent))
+    |> SubProject.changeset(add_parent_to_attrs(attrs, parent))
     |> SubProject.change_position(next_position_for_sub_project(parent, attrs))
     |> Repo.insert()
   end
 
-  defp add_parent(%{"title" => _} = attrs, parent), do: Map.put(attrs, "parent", parent)
-  defp add_parent(attrs, parent), do: Map.put(attrs, :parent, parent)
+  defp add_parent_to_attrs(%{"title" => _} = attrs, parent), do: Map.put(attrs, "parent", parent)
+  defp add_parent_to_attrs(attrs, parent), do: Map.put(attrs, :parent, parent)
 
   defp next_position_for_sub_project(_parent, %{position: position}) when is_integer(position),
     do: position

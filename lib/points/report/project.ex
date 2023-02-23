@@ -1,6 +1,6 @@
 defmodule Points.Report.Project do
   @moduledoc """
-  A folder for stories
+  A folder for tickets
   """
   use Ecto.Schema
   import Ecto.Changeset
