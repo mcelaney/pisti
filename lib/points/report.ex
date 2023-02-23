@@ -1,13 +1,13 @@
-defmodule Points.Plan do
+defmodule Points.Report do
   @moduledoc """
-  The Plan context.
+  The Report context.
   """
 
   import Ecto.Query, warn: false
   alias Points.Repo
 
-  alias Points.Plan.Project
-  alias Points.Plan.SubProject
+  alias Points.Report.Project
+  alias Points.Report.SubProject
 
   @doc """
   Returns the list of projects.
@@ -123,7 +123,7 @@ defmodule Points.Plan do
        do: position
 
   defp next_position_for_sub_project(parent, _attrs) do
-    Points.Plan.SubProject
+    SubProject
     |> where([sp], sp.parent_id == ^parent.id)
     |> select([sp], max(sp.position))
     |> Repo.one()

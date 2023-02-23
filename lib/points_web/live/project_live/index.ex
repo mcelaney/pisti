@@ -1,8 +1,8 @@
 defmodule PointsWeb.ProjectLive.Index do
   use PointsWeb, :live_view
 
-  alias Points.Plan
-  alias Points.Plan.Project
+  alias Points.Report
+  alias Points.Report.Project
 
   @impl true
   def render(assigns) do
@@ -63,7 +63,7 @@ defmodule PointsWeb.ProjectLive.Index do
   end
 
   defp apply_action(socket, :edit_project, %{"id" => id}) do
-    project = Plan.get_project!(id)
+    project = Report.get_project!(id)
 
     socket
     |> assign(:page_title, gettext("Edit %{title}", title: project.title))
@@ -84,13 +84,13 @@ defmodule PointsWeb.ProjectLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    project = Plan.get_project!(id)
-    {:ok, _} = Plan.delete_project(project)
+    project = Report.get_project!(id)
+    {:ok, _} = Report.delete_project(project)
 
     {:noreply, assign(socket, :projects, list_projects())}
   end
 
   defp list_projects do
-    Plan.list_projects()
+    Report.list_projects()
   end
 end

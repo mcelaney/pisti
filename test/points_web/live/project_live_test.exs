@@ -2,7 +2,7 @@ defmodule PointsWeb.ProjectLiveTest do
   use PointsWeb.ConnCase
 
   import Phoenix.LiveViewTest
-  import Points.PlanFixtures
+  import Points.ReportFixtures
 
   @create_attrs %{
     title: "some title"

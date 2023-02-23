@@ -1,10 +1,10 @@
-defmodule Points.Plan.Project do
+defmodule Points.Report.Project do
   @moduledoc """
   A folder for stories
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Points.Plan.SubProject
+  alias Points.Report.SubProject
 
   @project_statuses [:active, :archived]
 

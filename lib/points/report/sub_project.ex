@@ -1,10 +1,10 @@
-defmodule Points.Plan.SubProject do
+defmodule Points.Report.SubProject do
   @moduledoc """
   A version of Project that can be nested under other projects.
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Points.Plan.Project
+  alias Points.Report.Project
 
   @sub_project_statuses [:active, :archived]
 

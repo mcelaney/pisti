@@ -1,9 +1,9 @@
 defmodule PointsWeb.ProjectLive.Show do
   use PointsWeb, :live_view
 
-  alias Points.Plan
-  alias Points.Plan.Project
-  alias Points.Plan.SubProject
+  alias Points.Report
+  alias Points.Report.Project
+  alias Points.Report.SubProject
 
   @impl true
   def mount(_params, _session, socket) do
@@ -16,7 +16,7 @@ defmodule PointsWeb.ProjectLive.Show do
   end
 
   defp apply_action(socket, :show, %{"id" => id}) do
-    project = Plan.get_project!(id)
+    project = Report.get_project!(id)
 
     socket
     |> assign(:project, project)
@@ -24,7 +24,7 @@ defmodule PointsWeb.ProjectLive.Show do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    project = Plan.get_project!(id)
+    project = Report.get_project!(id)
 
     socket
     |> assign(:project, project)
@@ -32,7 +32,7 @@ defmodule PointsWeb.ProjectLive.Show do
   end
 
   defp apply_action(socket, :new_sub_project, %{"id" => id}) do
-    project = Plan.get_project!(id)
+    project = Report.get_project!(id)
 
     socket
     |> assign(:project, project)
@@ -41,8 +41,8 @@ defmodule PointsWeb.ProjectLive.Show do
   end
 
   defp apply_action(socket, :edit_sub_project, %{"parent_id" => parent_id, "id" => id}) do
-    sub_project = Plan.get_sub_project!(parent_id, id)
-    project = Plan.get_project!(parent_id)
+    sub_project = Report.get_sub_project!(parent_id, id)
+    project = Report.get_project!(parent_id)
 
     socket
     |> assign(:project, project)

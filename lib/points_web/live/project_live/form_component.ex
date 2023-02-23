@@ -1,7 +1,7 @@
 defmodule PointsWeb.ProjectLive.FormComponent do
   use PointsWeb, :live_component
 
-  alias Points.Plan
+  alias Points.Report
 
   @impl true
   def render(assigns) do
@@ -30,7 +30,7 @@ defmodule PointsWeb.ProjectLive.FormComponent do
 
   @impl true
   def update(%{project: project} = assigns, socket) do
-    changeset = Plan.change_project(project)
+    changeset = Report.change_project(project)
 
     {:ok,
      socket
@@ -42,7 +42,7 @@ defmodule PointsWeb.ProjectLive.FormComponent do
   def handle_event("validate", %{"project" => project_params}, socket) do
     changeset =
       socket.assigns.project
-      |> Plan.change_project(project_params)
+      |> Report.change_project(project_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
@@ -57,7 +57,7 @@ defmodule PointsWeb.ProjectLive.FormComponent do
   end
 
   defp save_project(socket, :edit, project_params) do
-    case Plan.update_project(socket.assigns.project, project_params) do
+    case Report.update_project(socket.assigns.project, project_params) do
       {:ok, _project} ->
         {:noreply,
          socket
@@ -70,7 +70,7 @@ defmodule PointsWeb.ProjectLive.FormComponent do
   end
 
   defp save_project(socket, :new, project_params) do
-    case Plan.create_project(project_params) do
+    case Report.create_project(project_params) do
       {:ok, _project} ->
         {:noreply,
          socket
