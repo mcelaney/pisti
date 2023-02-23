@@ -27,6 +27,11 @@ defmodule Points.AccountsTest do
       refute Accounts.get_user_by_email_and_password(user.email, "invalid")
     end
 
+    test "does not return the user is archived" do
+      {:ok, user} = user_fixture() |> Accounts.set_member() |> Accounts.set_archived()
+      refute Accounts.get_user_by_email_and_password(user.email, valid_user_password())
+    end
+
     test "returns the user if the email and password are valid" do
       %{id: id} = user = user_fixture()
 
@@ -623,6 +628,12 @@ defmodule Points.AccountsTest do
       assert_raise FunctionClauseError, fn ->
         Accounts.set_archived(user)
       end
+    end
+
+    test "removes any active sessions", %{member: user} do
+      token = Accounts.generate_user_session_token(user)
+      Accounts.set_archived(user)
+      refute Repo.get_by(UserToken, token: token)
     end
   end
 end

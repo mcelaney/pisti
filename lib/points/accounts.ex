@@ -56,7 +56,12 @@ defmodule Points.Accounts do
   """
   def get_user_by_email_and_password(email, password)
       when is_binary(email) and is_binary(password) do
-    user = Repo.get_by(User, email: email)
+    user =
+      User
+      |> where([u], u.email == ^email)
+      |> where([u], u.role != :archived)
+      |> Repo.one()
+
     if User.valid_password?(user, password), do: user
   end
 
@@ -398,8 +403,13 @@ defmodule Points.Accounts do
   def set_archived({_, _} = result), do: result
 
   def set_archived(%User{role: role} = user) when role == :member or role == :archived do
-    user
-    |> User.change_role_to_archived()
-    |> Repo.update()
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:user, User.change_role_to_archived(user))
+    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, :all))
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user}} -> {:ok, user}
+      {:error, :user, changeset, _} -> {:error, changeset}
+    end
   end
 end

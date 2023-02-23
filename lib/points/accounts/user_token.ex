@@ -3,6 +3,7 @@ defmodule Points.Accounts.UserToken do
 
   use Ecto.Schema
   import Ecto.Query
+  alias Points.Accounts.User
   alias Points.Accounts.UserToken
 
   @hash_algorithm :sha256
@@ -64,6 +65,12 @@ defmodule Points.Accounts.UserToken do
         select: user
 
     {:ok, query}
+  end
+
+  def user_sessions_query(%User{id: id}), do: user_sessions_query(id)
+
+  def user_sessions_query(user_id) do
+    where(UserToken, [ut], ut.user_id == ^user_id and ut.context == "session")
   end
 
   @doc """
