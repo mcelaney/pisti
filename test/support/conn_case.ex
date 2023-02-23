@@ -52,9 +52,26 @@ defmodule PointsWeb.ConnCase do
   end
 
   @doc """
+  Setup helper that registers and logs in pre-member users.
+
+      setup :register_confirm_and_log_in_joined
+
+  It stores an updated connection and a registered user in the
+  test context.
+  """
+  def register_confirm_and_log_in_joined(%{conn: conn}) do
+    {:ok, user} =
+      Points.AccountsFixtures.joined_fixture()
+      |> User.confirm_changeset()
+      |> Repo.update()
+
+    %{conn: log_in_user(conn, user), user: user}
+  end
+
+  @doc """
   Setup helper that registers and logs in members.
 
-      setup :register_and_log_in_member
+      setup :register_confirm_and_log_in_member
 
   It stores an updated connection and a registered member in the
   test context.
@@ -71,12 +88,12 @@ defmodule PointsWeb.ConnCase do
   @doc """
   Setup helper that registers and logs in admins.
 
-      setup :register_and_log_in_admin
+      setup :register_confirm_and_log_in_admin
 
   It stores an updated connection and a registered admin in the
   test context.
   """
-  def register_and_log_in_admin(%{conn: conn}) do
+  def register_confirm_and_log_in_admin(%{conn: conn}) do
     {:ok, user} =
       Points.AccountsFixtures.admin_fixture()
       |> User.confirm_changeset()

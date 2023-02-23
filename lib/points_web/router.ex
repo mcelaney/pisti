@@ -74,7 +74,8 @@ defmodule PointsWeb.Router do
     live_session :planning,
       on_mount: [
         {UserAuth, :ensure_authenticated},
-        {UserAuth, :ensure_confirmed}
+        {UserAuth, :ensure_confirmed},
+        {UserAuth, :ensure_member_or_admin}
       ] do
       live "/projects", ProjectLive.Index, :index
       live "/projects/new", ProjectLive.Index, :new

@@ -156,4 +156,15 @@ defmodule PointsWeb.ProjectLiveTest do
       assert html =~ "some updated title"
     end
   end
+
+  describe "Unauthorized Index" do
+    setup [:register_confirm_and_log_in_joined]
+
+    test "rejects unauthorized users", %{conn: conn} do
+      {:error, {:redirect, %{flash: %{"error" => flash}}}} =
+        live(conn, ~p"/projects")
+
+      assert flash =~ "must be confirmed"
+    end
+  end
 end

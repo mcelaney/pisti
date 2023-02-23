@@ -15,7 +15,7 @@ defmodule PointsWeb.UsersLiveTest do
   end
 
   describe "Index" do
-    setup [:create_users, :register_and_log_in_admin]
+    setup [:create_users, :register_confirm_and_log_in_admin]
 
     test "lists all users", %{
       conn: conn,
