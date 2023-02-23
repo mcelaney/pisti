@@ -180,12 +180,16 @@ defmodule PointsWeb.UserAuth do
 
   def on_mount(:ensure_member_or_admin, _params, _session, socket) do
     role = socket.assigns.current_user.role
+
     if role == :member || role == :admin do
       {:cont, socket}
     else
       socket =
         socket
-        |> Phoenix.LiveView.put_flash(:error, "Your membership must be confirmed to access this page.")
+        |> Phoenix.LiveView.put_flash(
+          :error,
+          "Your membership must be confirmed to access this page."
+        )
         |> Phoenix.LiveView.redirect(to: ~p"/")
 
       {:halt, socket}

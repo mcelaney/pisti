@@ -18,7 +18,7 @@ defmodule Points.Accounts do
       iex> list_users()
       [%User{}, ...]
   """
-  def list_users() do
+  def list_users do
     User
     |> order_by([u], asc: u.email)
     |> Repo.all()
