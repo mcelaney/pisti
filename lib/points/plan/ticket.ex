@@ -18,8 +18,8 @@ defmodule Points.Plan.Ticket do
   end
 
   @doc false
-  def changeset(project, attrs) do
-    project
+  def changeset(ticket, attrs) do
+    ticket
     |> cast(attrs, [:title, :description, :extra_info])
     |> validate_required([:title])
     |> unsafe_validate_unique([:title, :project_id], Points.Repo)
