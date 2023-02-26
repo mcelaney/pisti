@@ -1,6 +1,6 @@
 defmodule Points.Report do
   @moduledoc """
-  The Report context.
+  The Report context organizes projects and sub-projects for whole-report export
   """
 
   import Ecto.Query, warn: false
@@ -26,6 +26,27 @@ defmodule Points.Report do
   end
 
   @doc """
+  Returns the list of projects.
+
+  ## Examples
+
+      iex> list_active_sub_projects(1)
+      [%SubProject{}, ...]
+
+      iex> list_active_sub_projects(%Project{})
+      [%SubProject{}, ...]
+
+  """
+  def list_active_sub_projects(%Project{id: project_id}), do: list_active_sub_projects(project_id)
+
+  def list_active_sub_projects(project_id) do
+    SubProject
+    |> where([p], p.parent_id == ^project_id and p.status == :active)
+    |> order_by([p], asc: p.position)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single project.
 
   Raises `Ecto.NoResultsError` if the Project does not exist.
@@ -40,6 +61,27 @@ defmodule Points.Report do
 
   """
   def get_project!(id) do
+    Project
+    |> where([p], p.id == ^id)
+    |> where([p], is_nil(p.parent_id))
+    |> Repo.one!()
+  end
+
+  @doc """
+  Gets a single project with it's subprojects preloaded.
+
+  Raises `Ecto.NoResultsError` if the Project does not exist.
+
+  ## Examples
+
+      iex> get_active_project_with_sub_projects!(123)
+      %Project{}
+
+      iex> get_active_project_with_sub_projects!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_active_project_with_sub_projects!(id) do
     Project
     |> where([p], p.id == ^id)
     |> where([p], is_nil(p.parent_id) and p.status == :active)

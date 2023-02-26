@@ -94,6 +94,7 @@ defmodule PointsWeb do
       import PointsWeb.Components.CoreComponents.Header
       import PointsWeb.Components.CoreComponents.JSCommands
       import PointsWeb.Components.CoreComponents.List
+      import PointsWeb.Components.CoreComponents.Markdown
       import PointsWeb.Components.CoreComponents.Modal
       import PointsWeb.Components.CoreComponents.Table
       import PointsWeb.Gettext

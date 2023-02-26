@@ -5,34 +5,89 @@
       <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= gettext("projects") %>
     </.link>
     /
-    <.link patch={~p"/projects/#{@parent}"}>
-      <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= @parent.title %>
+    <.link patch={~p"/projects/#{@project}"}>
+      <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= @project.title %>
     </.link>
   </:subtitle>
 
   <:actions>
     <.link
-      patch={~p"/projects/#{@parent}/sub_projects/#{@sub_project}/edit"}
+      patch={~p"/projects/#{@project}/sub_projects/#{@sub_project}/edit"}
       phx-click={JS.push_focus()}
     >
       <.button><%= gettext("Edit project") %></.button>
     </.link>
+
+    <.link
+      patch={~p"/projects/#{@project}/sub_projects/#{@sub_project}/new_ticket"}
+      phx-click={JS.push_focus()}
+    >
+      <.button><%= gettext("Add Ticket") %></.button>
+    </.link>
   </:actions>
 </.header>
+
+<.table
+  :if={@tickets != []}
+  id="tickets"
+  rows={@tickets}
+  row_click={&JS.navigate(~p"/tickets/#{&1}")}
+>
+  <:col :let={ticket} label={gettext("Title")}><%= ticket.title %></:col>
+  <:action :let={ticket}>
+    <div class="sr-only">
+      <.link navigate={~p"/tickets/#{ticket}"}>
+        <%= gettext("Show") %>
+      </.link>
+    </div>
+    <.link patch={~p"/projects/#{@project}/sub_projects/#{@sub_project}/edit_ticket/#{ticket}"}>
+      <%= gettext("Edit") %>
+    </.link>
+  </:action>
+  <:action :let={ticket}>
+    <.link
+      phx-click={
+        JS.push("delete_ticket",
+          value: %{ticket_id: ticket.id, project_id: @project.id, sub_project_id: @sub_project.id}
+        )
+      }
+      data-confirm={gettext("Are you sure?")}
+    >
+      <%= gettext("Delete") %>
+    </.link>
+  </:action>
+</.table>
 
 <.modal
   :if={@live_action == :edit}
   id="project-modal"
   show
-  on_cancel={JS.patch(~p"/projects/#{@parent}/sub_projects/#{@sub_project}")}
+  on_cancel={JS.patch(~p"/projects/#{@project}/sub_projects/#{@sub_project}")}
 >
   <.live_component
     module={PointsWeb.SubProjectLive.FormComponent}
-    id={@parent.id}
+    id={@project.id}
     title={@page_title}
     action={@live_action}
-    parent={@parent}
+    project={@project}
     sub_project={@sub_project}
-    navigate={~p"/projects/#{@parent}/sub_projects/#{@sub_project}"}
+    navigate={~p"/projects/#{@project}/sub_projects/#{@sub_project}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :new_ticket || @live_action == :edit_ticket}
+  id="ticket-modal"
+  show
+  on_cancel={JS.patch(~p"/projects/#{@project}/sub_projects/#{@sub_project}")}
+>
+  <.live_component
+    module={PointsWeb.TicketLive.FormComponent}
+    project={@sub_project}
+    id={@sub_project.id}
+    title={@page_title}
+    action={@live_action}
+    ticket={@ticket}
+    navigate={~p"/projects/#{@project}/sub_projects/#{@sub_project}"}
   />
 </.modal>

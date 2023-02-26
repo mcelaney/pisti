@@ -81,13 +81,29 @@ defmodule PointsWeb.Router do
       live "/projects/new", ProjectLive.Index, :new
       live "/projects/:id/edit_project", ProjectLive.Index, :edit_project
 
-      live "/projects/:id", ProjectLive.Show, :show
-      live "/projects/:id/edit", ProjectLive.Show, :edit
-      live "/projects/:id/new_sub_project", ProjectLive.Show, :new_sub_project
-      live "/projects/:parent_id/edit_sub_project/:id", ProjectLive.Show, :edit_sub_project
+      live "/projects/:project_id", ProjectLive.Show, :show
+      live "/projects/:project_id/edit", ProjectLive.Show, :edit
+      live "/projects/:project_id/new_sub_project", ProjectLive.Show, :new_sub_project
+      live "/projects/:project_id/new_ticket", ProjectLive.Show, :new_ticket
+      live "/projects/:project_id/edit_ticket/:ticket_id", ProjectLive.Show, :edit_ticket
 
-      live "/projects/:parent_id/sub_projects/:id", SubProjectLive.Show, :show
-      live "/projects/:parent_id/sub_projects/:id/edit", SubProjectLive.Show, :edit
+      live "/projects/:project_id/edit_sub_project/:sub_project_id",
+           ProjectLive.Show,
+           :edit_sub_project
+
+      live "/projects/:project_id/sub_projects/:sub_project_id", SubProjectLive.Show, :show
+      live "/projects/:project_id/sub_projects/:sub_project_id/edit", SubProjectLive.Show, :edit
+
+      live "/projects/:project_id/sub_projects/:sub_project_id/new_ticket",
+           SubProjectLive.Show,
+           :new_ticket
+
+      live "/projects/:project_id/sub_projects/:sub_project_id/edit_ticket/:ticket_id",
+           SubProjectLive.Show,
+           :edit_ticket
+
+      live "/tickets/:id", TicketLive.Show, :show
+      live "/tickets/:id/edit", TicketLive.Show, :edit
     end
 
     live_session :user_roles,

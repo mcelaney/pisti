@@ -14,16 +14,20 @@
     <.link patch={~p"/projects/#{@project}/new_sub_project"} phx-click={JS.push_focus()}>
       <.button><%= gettext("Add Sub-Project") %></.button>
     </.link>
+
+    <.link patch={~p"/projects/#{@project}/new_ticket"} phx-click={JS.push_focus()}>
+      <.button><%= gettext("Add Ticket") %></.button>
+    </.link>
   </:actions>
 </.header>
 
 <.table
+  :if={@sub_projects != []}
   id="sub_projects"
-  rows={@project.sub_projects}
+  rows={@sub_projects}
   row_click={&JS.navigate(~p"/projects/#{@project}/sub_projects/#{&1}")}
 >
   <:col :let={sub_project} label={gettext("Title")}><%= sub_project.title %></:col>
-  <:col :let={sub_project} label={gettext("Position")}><%= sub_project.position %></:col>
   <:action :let={sub_project}>
     <div class="sr-only">
       <.link navigate={~p"/projects/#{@project}/sub_projects/#{sub_project}"}>
@@ -36,7 +40,40 @@
   </:action>
   <:action :let={sub_project}>
     <.link
-      phx-click={JS.push("delete", value: %{id: sub_project.id})}
+      phx-click={
+        JS.push("delete_sub_project",
+          value: %{sub_project_id: sub_project.id, project_id: @project.id}
+        )
+      }
+      data-confirm={gettext("Are you sure?")}
+    >
+      <%= gettext("Delete") %>
+    </.link>
+  </:action>
+</.table>
+
+<.table
+  :if={@tickets != []}
+  id="tickets"
+  rows={@tickets}
+  row_click={&JS.navigate(~p"/tickets/#{&1}")}
+>
+  <:col :let={ticket} label={gettext("Title")}><%= ticket.title %></:col>
+  <:action :let={ticket}>
+    <div class="sr-only">
+      <.link navigate={~p"/tickets/#{ticket}"}>
+        <%= gettext("Show") %>
+      </.link>
+    </div>
+    <.link patch={~p"/projects/#{@project}/edit_ticket/#{ticket}"}>
+      <%= gettext("Edit") %>
+    </.link>
+  </:action>
+  <:action :let={ticket}>
+    <.link
+      phx-click={
+        JS.push("delete_ticket", value: %{ticket_id: ticket.id, project_id: @project.id})
+      }
       data-confirm={gettext("Are you sure?")}
     >
       <%= gettext("Delete") %>
@@ -61,7 +98,7 @@
 </.modal>
 
 <.modal
-  :if={@live_action == :new_sub_project}
+  :if={@live_action == :new_sub_project || @live_action == :edit_sub_project}
   id="sub_project-modal"
   show
   on_cancel={JS.patch(~p"/projects/#{@project}")}
@@ -78,18 +115,18 @@
 </.modal>
 
 <.modal
-  :if={@live_action == :edit_sub_project}
-  id="project-modal"
+  :if={@live_action == :new_ticket || @live_action == :edit_ticket}
+  id="ticket-modal"
   show
   on_cancel={JS.patch(~p"/projects/#{@project}")}
 >
   <.live_component
-    module={PointsWeb.SubProjectLive.FormComponent}
-    parent={@project}
+    module={PointsWeb.TicketLive.FormComponent}
+    project={@project}
     id={@project.id}
     title={@page_title}
     action={@live_action}
-    sub_project={@sub_project}
+    ticket={@ticket}
     navigate={~p"/projects/#{@project}"}
   />
 </.modal>

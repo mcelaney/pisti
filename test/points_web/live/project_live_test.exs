@@ -12,6 +12,18 @@ defmodule PointsWeb.ProjectLiveTest do
   }
   @invalid_attrs %{title: nil}
 
+  @create_ticket_attrs %{
+    title: "some ticket title",
+    description: "some ticket description",
+    extra_info: "some ticket information"
+  }
+
+  @update_ticket_attrs %{
+    title: "some updated ticket title",
+    description: "some updated ticket description",
+    extra_info: "some updated ticket information"
+  }
+
   defp create_project(_) do
     project = project_fixture()
     %{project: project}
@@ -138,7 +150,7 @@ defmodule PointsWeb.ProjectLiveTest do
 
       assert show_live
              |> element("#sub_projects-#{sub_project.id} a", "Edit")
-             |> render_click() =~ "Edit #{sub_project.title}"
+             |> render_click() =~ "Edit"
 
       assert_patch(show_live, ~p"/projects/#{project}/edit_sub_project/#{sub_project}")
 
@@ -154,6 +166,60 @@ defmodule PointsWeb.ProjectLiveTest do
 
       assert html =~ "Sub-project updated successfully"
       assert html =~ "some updated title"
+    end
+
+    test "saves new ticket", %{conn: conn, project: project} do
+      {:ok, show_live, _html} = live(conn, ~p"/projects/#{project}")
+
+      assert show_live |> element("a", "Add Ticket") |> render_click() =~
+               "New Ticket"
+
+      assert_patch(show_live, ~p"/projects/#{project}/new_ticket")
+
+      assert show_live
+             |> form("#ticket-form", ticket: @invalid_attrs)
+             |> render_change() =~ "can&#39;t be blank"
+
+      {:ok, _, html} =
+        show_live
+        |> form("#ticket-form", ticket: @create_ticket_attrs)
+        |> render_submit()
+        |> follow_redirect(conn, ~p"/projects/#{project}")
+
+      assert html =~ "Ticket created successfully"
+      assert html =~ "some ticket title"
+    end
+
+    test "updates ticket within modal", %{conn: conn, project: project} do
+      ticket = Points.PlanFixtures.ticket_fixture(project)
+      {:ok, show_live, _html} = live(conn, ~p"/projects/#{project}")
+
+      assert show_live
+             |> element("#tickets-#{ticket.id} a", "Edit")
+             |> render_click() =~ "Edit"
+
+      assert_patch(show_live, ~p"/projects/#{project}/edit_ticket/#{ticket}")
+
+      assert show_live
+             |> form("#ticket-form", ticket: @invalid_attrs)
+             |> render_change() =~ "can&#39;t be blank"
+
+      {:ok, _, html} =
+        show_live
+        |> form("#ticket-form", ticket: @update_ticket_attrs)
+        |> render_submit()
+        |> follow_redirect(conn, ~p"/projects/#{project}")
+
+      assert html =~ "Ticket updated successfully"
+      assert html =~ "some updated ticket title"
+    end
+
+    test "deletes ticket in listing", %{conn: conn, project: project} do
+      ticket = Points.PlanFixtures.ticket_fixture(project)
+      {:ok, show_live, _html} = live(conn, ~p"/projects/#{project}")
+
+      assert show_live |> element("#tickets-#{ticket.id} a", "Delete") |> render_click()
+      refute has_element?(show_live, "#ticket-#{ticket.id}")
     end
   end
 

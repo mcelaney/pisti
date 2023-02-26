@@ -9,31 +9,56 @@ defmodule Points.ReportTest do
   describe "projects" do
     @invalid_attrs %{title: nil}
 
-    test "list_projects/0 returns projects" do
-      project = project_fixture()
+    setup do
+      %{project: project_fixture()}
+    end
+
+    test "list_projects/0 returns projects", %{project: project} do
       assert Report.list_projects() == [project]
     end
 
-    test "list_projects/0 does not return archived projects" do
-      project = project_fixture()
+    test "list_projects/0 does not return archived projects", %{project: project} do
       _archived_project = project_fixture() |> Report.archive_project()
       assert Report.list_projects() == [project]
     end
 
-    test "get_project!/1 returns the project with given id" do
-      project = project_fixture()
-      assert Report.get_project!(project.id) == project |> Repo.preload(:sub_projects)
+    test "get_active_project_with_sub_projects!/1 returns the project with given id", %{
+      project: project
+    } do
+      assert Report.get_active_project_with_sub_projects!(project.id) ==
+               project |> Repo.preload(:sub_projects)
     end
 
-    test "get_project!/1 does not return archived sub-projects" do
-      project = project_fixture()
+    test "get_active_project_with_sub_projects!/1 does not return archived projects", %{
+      project: project
+    } do
+      Report.archive_project(project)
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Report.get_active_project_with_sub_projects!(project.id)
+      end
+    end
+
+    test "get_active_project_with_sub_projects!/1 does not return archived sub-projects", %{
+      project: project
+    } do
       sub_project = sub_project_fixture(%{parent: project})
 
       _archived_sub_project =
         sub_project_fixture(%{parent: project}) |> Report.archive_sub_project()
 
-      %{sub_projects: [returned]} = Report.get_project!(project.id)
+      %{sub_projects: [returned]} = Report.get_active_project_with_sub_projects!(project.id)
       assert returned.id == sub_project.id
+    end
+
+    test "get_project!/1 returns the project with given id", %{project: project} do
+      assert Report.get_project!(project.id) == project
+    end
+
+    test "get_project!/1 will return archived projects", %{project: project} do
+      result = Report.get_project!(project.id)
+      assert %Project{} = result
+      assert project.id == result.id
     end
 
     test "create_project/1 with valid data creates a project" do
@@ -59,7 +84,9 @@ defmodule Points.ReportTest do
     test "update_project/2 with invalid data returns error changeset" do
       project = project_fixture()
       assert {:error, %Ecto.Changeset{}} = Report.update_project(project, @invalid_attrs)
-      assert Report.get_project!(project.id) == project |> Repo.preload(:sub_projects)
+
+      assert Report.get_active_project_with_sub_projects!(project.id) ==
+               project |> Repo.preload(:sub_projects)
     end
 
     test "archive_project/1 changes the project status" do
@@ -73,7 +100,10 @@ defmodule Points.ReportTest do
     test "delete_project/1 deletes the project" do
       project = project_fixture()
       assert {:ok, %Project{}} = Report.delete_project(project)
-      assert_raise Ecto.NoResultsError, fn -> Report.get_project!(project.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Report.get_active_project_with_sub_projects!(project.id)
+      end
     end
 
     test "change_project/1 returns a project changeset" do
@@ -88,6 +118,18 @@ defmodule Points.ReportTest do
     end
 
     @invalid_attrs %{title: nil}
+
+    test "list_sub_projects/1 returns the active sub projects for a project id" do
+      sub_project = sub_project_fixture()
+      [result] = Report.list_active_sub_projects(sub_project.parent.id)
+      assert result.id == sub_project.id
+    end
+
+    test "list_sub_projects/1 returns the active sub projects for a project" do
+      sub_project = sub_project_fixture()
+      [result] = Report.list_active_sub_projects(sub_project.parent)
+      assert result.id == sub_project.id
+    end
 
     test "get_sub_project!/1 returns the sub_project with given id" do
       sub_project = sub_project_fixture()

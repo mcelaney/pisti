@@ -63,7 +63,7 @@ defmodule PointsWeb.ProjectLive.Index do
   end
 
   defp apply_action(socket, :edit_project, %{"id" => id}) do
-    project = Report.get_project!(id)
+    project = Report.get_active_project_with_sub_projects!(id)
 
     socket
     |> assign(:page_title, gettext("Edit %{title}", title: project.title))
@@ -84,7 +84,7 @@ defmodule PointsWeb.ProjectLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    project = Report.get_project!(id)
+    project = Report.get_active_project_with_sub_projects!(id)
     {:ok, _} = Report.delete_project(project)
 
     {:noreply, assign(socket, :projects, list_projects())}
