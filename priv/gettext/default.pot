@@ -1,0 +1,526 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:130
+#, elixir-autogen, elixir-format
+msgid "A link to confirm your email change has been sent to the new address."
+msgstr ""
+
+#: lib/points_web/components/core_components/table.ex:34
+#, elixir-autogen, elixir-format
+msgid "Actions"
+msgstr ""
+
+#: lib/points_web/live/project_live/show.html.heex:15
+#, elixir-autogen, elixir-format
+msgid "Add Sub-Project"
+msgstr ""
+
+#: lib/points_web/live/project_live/show.html.heex:19
+#: lib/points_web/live/sub_project_live/show.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Add Ticket"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:52
+#, elixir-autogen, elixir-format
+msgid "Admin"
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:13
+#, elixir-autogen, elixir-format
+msgid "Already registered?"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:26
+#, elixir-autogen, elixir-format
+msgid "Archive"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:49
+#, elixir-autogen, elixir-format
+msgid "Archived"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:30
+#: lib/points_web/live/project_live/show.html.heex:48
+#: lib/points_web/live/project_live/show.html.heex:77
+#: lib/points_web/live/sub_project_live/show.html.heex:54
+#: lib/points_web/live/user_roles_live/role_components.ex:41
+#, elixir-autogen, elixir-format
+msgid "Are you sure?"
+msgstr ""
+
+#: lib/points_web/components/layouts/app.html.heex:14
+#: lib/points_web/controllers/page_html/home.html.heex:12
+#, elixir-autogen, elixir-format
+msgid "Attempting to reconnect"
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:8
+#: lib/points_web/live/user/settings_live.ex:33
+#, elixir-autogen, elixir-format
+msgid "Change Email"
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:37
+#: lib/points_web/live/user/settings_live.ex:71
+#, elixir-autogen, elixir-format
+msgid "Change Password"
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:71
+#, elixir-autogen, elixir-format
+msgid "Changing..."
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_live.ex:9
+#, elixir-autogen, elixir-format
+msgid "Confirm Account"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_live.ex:15
+#, elixir-autogen, elixir-format
+msgid "Confirm my account"
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:28
+#: lib/points_web/live/user/settings_live.ex:59
+#, elixir-autogen, elixir-format
+msgid "Confirm new password"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_live.ex:14
+#, elixir-autogen, elixir-format
+msgid "Confirming..."
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:41
+#, elixir-autogen, elixir-format
+msgid "Create an account"
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:40
+#, elixir-autogen, elixir-format
+msgid "Creating account..."
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:28
+#: lib/points_web/live/user/settings_live.ex:65
+#, elixir-autogen, elixir-format
+msgid "Current password"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:32
+#: lib/points_web/live/project_live/show.html.heex:50
+#: lib/points_web/live/project_live/show.html.heex:79
+#: lib/points_web/live/sub_project_live/show.html.heex:56
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:33
+#, elixir-autogen, elixir-format
+msgid "Demote"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/form_component.ex:23
+#, elixir-autogen, elixir-format
+msgid "Description"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:10
+#, elixir-autogen, elixir-format
+msgid "Don't have an account?"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:25
+#: lib/points_web/live/project_live/show.html.heex:11
+#: lib/points_web/live/project_live/show.html.heex:38
+#: lib/points_web/live/project_live/show.html.heex:69
+#: lib/points_web/live/sub_project_live/show.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "Edit"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:69
+#: lib/points_web/live/project_live/show.ex:87
+#: lib/points_web/live/project_live/show.ex:93
+#: lib/points_web/live/sub_project_live/show.ex:79
+#, elixir-autogen, elixir-format
+msgid "Edit %{title}"
+msgstr ""
+
+#: lib/points_web/live/project_live/show.ex:99
+#: lib/points_web/live/sub_project_live/show.ex:84
+#: lib/points_web/live/ticket_live/show.ex:36
+#, elixir-autogen, elixir-format
+msgid "Edit Ticket"
+msgstr ""
+
+#: lib/points_web/live/sub_project_live/show.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Edit project"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/show.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Edit ticket"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_instructions_live.ex:11
+#: lib/points_web/live/user/login_live.ex:26
+#: lib/points_web/live/user/registration_live.ex:36
+#: lib/points_web/live/user_roles_live/index.ex:16
+#, elixir-autogen, elixir-format
+msgid "Email"
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:84
+#, elixir-autogen, elixir-format
+msgid "Email change link is invalid or it has expired."
+msgstr ""
+
+#: lib/points_web/live/user/settings_live.ex:81
+#, elixir-autogen, elixir-format
+msgid "Email changed successfully."
+msgstr ""
+
+#: lib/points_web/components/layouts/app.html.heex:4
+#: lib/points_web/controllers/page_html/home.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Error!"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/form_component.ex:24
+#, elixir-autogen, elixir-format
+msgid "Extra Info"
+msgstr ""
+
+#: lib/points_web/live/user/forgot_password_live.ex:10
+#: lib/points_web/live/user/login_live.ex:32
+#, elixir-autogen, elixir-format
+msgid "Forgot your password?"
+msgstr ""
+
+#: lib/points_web/live/user/forgot_password_live.ex:44
+#, elixir-autogen, elixir-format
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:50
+#, elixir-autogen, elixir-format
+msgid "Joined"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:30
+#, elixir-autogen, elixir-format
+msgid "Keep me logged in"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:11
+#: lib/points_web/live/project_live/index.ex:81
+#, elixir-autogen, elixir-format
+msgid "Listing Projects"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/index.ex:12
+#: lib/points_web/live/user_roles_live/index.ex:37
+#, elixir-autogen, elixir-format
+msgid "Listing Users"
+msgstr ""
+
+#: lib/points_web/components/layouts/root.html.heex:45
+#: lib/points_web/live/user/confirmation_instructions_live.ex:22
+#: lib/points_web/live/user/confirmation_live.ex:23
+#: lib/points_web/live/user/reset_password_live.ex:41
+#, elixir-autogen, elixir-format
+msgid "Log in"
+msgstr ""
+
+#: lib/points_web/controllers/page_html/home.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Log in to start planning"
+msgstr ""
+
+#: lib/points_web/components/layouts/root.html.heex:32
+#, elixir-autogen, elixir-format
+msgid "Log out"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:51
+#, elixir-autogen, elixir-format
+msgid "Member"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:14
+#: lib/points_web/live/project_live/index.ex:75
+#, elixir-autogen, elixir-format
+msgid "New Project"
+msgstr ""
+
+#: lib/points_web/live/project_live/show.ex:90
+#, elixir-autogen, elixir-format
+msgid "New Sub-Project for %{title}"
+msgstr ""
+
+#: lib/points_web/live/project_live/show.ex:96
+#: lib/points_web/live/sub_project_live/show.ex:82
+#, elixir-autogen, elixir-format
+msgid "New Ticket for %{title}"
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:24
+#: lib/points_web/live/user/settings_live.ex:55
+#, elixir-autogen, elixir-format
+msgid "New password"
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:33
+#: lib/points_web/live/user/reset_password_live.ex:21
+#: lib/points_web/live/user/settings_live.ex:18
+#: lib/points_web/live/user/settings_live.ex:50
+#, elixir-autogen, elixir-format
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:27
+#: lib/points_web/live/user/registration_live.ex:37
+#, elixir-autogen, elixir-format
+msgid "Password"
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:69
+#, elixir-autogen, elixir-format
+msgid "Password reset successfully."
+msgstr ""
+
+#: lib/points_web/controllers/page_html/home.html.heex:16
+#, elixir-autogen, elixir-format
+msgid "Points - a project estimation tool"
+msgstr ""
+
+#: lib/points_web/live/project_live/form_component.ex:77
+#, elixir-autogen, elixir-format
+msgid "Project created successfully"
+msgstr ""
+
+#: lib/points_web/live/project_live/form_component.ex:64
+#, elixir-autogen, elixir-format
+msgid "Project updated successfully"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:20
+#: lib/points_web/live/user_roles_live/role_components.ex:27
+#, elixir-autogen, elixir-format
+msgid "Promote"
+msgstr ""
+
+#: lib/points_web/components/layouts/root.html.heex:39
+#: lib/points_web/live/user/confirmation_instructions_live.ex:20
+#: lib/points_web/live/user/confirmation_live.ex:21
+#: lib/points_web/live/user/reset_password_live.ex:39
+#, elixir-autogen, elixir-format
+msgid "Register"
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "Register for an account"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_instructions_live.ex:8
+#: lib/points_web/live/user/confirmation_instructions_live.ex:14
+#, elixir-autogen, elixir-format
+msgid "Resend confirmation instructions"
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:10
+#: lib/points_web/live/user/reset_password_live.ex:33
+#, elixir-autogen, elixir-format
+msgid "Reset Password"
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:87
+#, elixir-autogen, elixir-format
+msgid "Reset password link is invalid or it has expired."
+msgstr ""
+
+#: lib/points_web/live/user/reset_password_live.ex:32
+#, elixir-autogen, elixir-format
+msgid "Resetting..."
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:14
+#, elixir-autogen, elixir-format
+msgid "Restore"
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/index.ex:17
+#, elixir-autogen, elixir-format
+msgid "Role"
+msgstr ""
+
+#: lib/points_web/live/project_live/form_component.ex:24
+#: lib/points_web/live/sub_project_live/form_component.ex:24
+#, elixir-autogen, elixir-format
+msgid "Save Project"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/form_component.ex:26
+#, elixir-autogen, elixir-format
+msgid "Save Ticket"
+msgstr ""
+
+#: lib/points_web/live/project_live/form_component.ex:24
+#: lib/points_web/live/sub_project_live/form_component.ex:24
+#: lib/points_web/live/ticket_live/form_component.ex:26
+#, elixir-autogen, elixir-format
+msgid "Saving..."
+msgstr ""
+
+#: lib/points_web/live/user_roles_live/role_components.ex:8
+#, elixir-autogen, elixir-format
+msgid "Self"
+msgstr ""
+
+#: lib/points_web/live/user/forgot_password_live.ex:18
+#, elixir-autogen, elixir-format
+msgid "Send password reset instructions"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_instructions_live.ex:13
+#: lib/points_web/live/user/forgot_password_live.ex:17
+#, elixir-autogen, elixir-format
+msgid "Sending..."
+msgstr ""
+
+#: lib/points_web/components/layouts/root.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "Settings"
+msgstr ""
+
+#: lib/points_web/live/project_live/index.ex:23
+#: lib/points_web/live/project_live/show.html.heex:34
+#: lib/points_web/live/project_live/show.html.heex:65
+#: lib/points_web/live/sub_project_live/show.html.heex:40
+#, elixir-autogen, elixir-format
+msgid "Show"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:36
+#, elixir-autogen, elixir-format
+msgid "Sigining in..."
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:48
+#, elixir-autogen, elixir-format
+msgid "Sign In"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:37
+#: lib/points_web/live/user/registration_live.ex:15
+#, elixir-autogen, elixir-format
+msgid "Sign in"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:8
+#, elixir-autogen, elixir-format
+msgid "Sign in to account"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:12
+#, elixir-autogen, elixir-format
+msgid "Sign up"
+msgstr ""
+
+#: lib/points_web/live/sub_project_live/form_component.ex:60
+#, elixir-autogen, elixir-format
+msgid "Sub-project created successfully"
+msgstr ""
+
+#: lib/points_web/live/sub_project_live/form_component.ex:77
+#, elixir-autogen, elixir-format
+msgid "Sub-project updated successfully"
+msgstr ""
+
+#: lib/points_web/components/layouts/app.html.heex:3
+#: lib/points_web/controllers/page_html/home.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "Success!"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/form_component.ex:62
+#, elixir-autogen, elixir-format
+msgid "Ticket created successfully"
+msgstr ""
+
+#: lib/points_web/live/ticket_live/form_component.ex:79
+#, elixir-autogen, elixir-format
+msgid "Ticket updated successfully"
+msgstr ""
+
+#: lib/points_web/live/project_live/form_component.ex:22
+#: lib/points_web/live/project_live/index.ex:20
+#: lib/points_web/live/project_live/show.html.heex:30
+#: lib/points_web/live/project_live/show.html.heex:61
+#: lib/points_web/live/sub_project_live/form_component.ex:22
+#: lib/points_web/live/sub_project_live/show.html.heex:36
+#: lib/points_web/live/ticket_live/form_component.ex:22
+#, elixir-autogen, elixir-format
+msgid "Title"
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_live.ex:55
+#, elixir-autogen, elixir-format
+msgid "User confirmation link is invalid or it has expired."
+msgstr ""
+
+#: lib/points_web/live/user/confirmation_live.ex:40
+#, elixir-autogen, elixir-format
+msgid "User confirmed successfully."
+msgstr ""
+
+#: lib/points_web/components/layouts/app.html.heex:8
+#: lib/points_web/controllers/page_html/home.html.heex:6
+#, elixir-autogen, elixir-format
+msgid "We can't find the internet"
+msgstr ""
+
+#: lib/points_web/live/user/forgot_password_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "We'll send a password reset link to your inbox"
+msgstr ""
+
+#: lib/points_web/components/core_components/flash.ex:52
+#: lib/points_web/components/core_components/modal.ex:73
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr ""
+
+#: lib/points_web/live/user/login_live.ex:14
+#, elixir-autogen, elixir-format
+msgid "for an account now."
+msgstr ""
+
+#: lib/points_web/live/project_live/show.html.heex:5
+#: lib/points_web/live/sub_project_live/show.html.heex:5
+#: lib/points_web/live/ticket_live/show.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "projects"
+msgstr ""
+
+#: lib/points_web/live/user/registration_live.ex:17
+#, elixir-autogen, elixir-format
+msgid "to your account now."
+msgstr ""
